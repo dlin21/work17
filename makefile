@@ -1,14 +1,19 @@
-all: write.c
-	gcc write.c
+all: control write
 
-start:
-	gcc control.c
-	./a.out -create
+control: control.o
+	gcc -o control control.o
 
-run:
-	gcc write.c
-	./a.out
+write: write.o
+	gcc -o write write.o
 
-end:
-	gcc control.c
-	./a.out -remove
+write.o: write.c
+	gcc -c write.c
+
+control.o: control.c
+	gcc -c control.c
+
+clean:
+	rm *.o
+	rm control
+	rm write
+	rm *.txt
