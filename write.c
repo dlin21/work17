@@ -43,7 +43,6 @@ int main(){
   fgets(line,4096,stdin);
   *len = strlen(line);
 
-  // Write line to phone.txt
   f = open("phone.txt", O_WRONLY | O_APPEND);
   if(f == -1) {
       printf("error: %s\n", strerror(errno));
@@ -55,6 +54,7 @@ int main(){
       printf("error: %s\n", strerror(errno));
       return 0;
   }
+  
   shmdt(len);
   sb.sem_op = 1; 
   semop(semd, &sb, 1);
